@@ -1,13 +1,13 @@
 CC = gcc
-CFLAGS = -O1 -std=gnu++11
+CFLAGS = -O3 -Wall
 LIBS = 
 
 TARGETS = serial
 
-all:	$(TARGETS)
+all: $(TARGETS)
 
-serial: serial.o quadTree.o
-	$(CC) -o $@ $(LIBS) serial.o quadTree.o
+serial: forcepairs.o quadTree.o
+	$(CC) -o $@ $(LIBS) forcepairs.o quadTree.o
 
 serial.o: serial.cpp body.h quadTree.cpp
 	$(CC) -c $(CFLAGS) serial.cpp

@@ -1,72 +1,42 @@
 #ifndef QUADTREE_H
 #define QUADTREE_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <vector>
 #include "body.h"
-
-using std::vector;
 
 struct Point
 {
-  double x, y;
-  Point() { }
-  Point(double _x, double _y) 
+    double x, y;
+    Point() { }
+    Point(double _x, double _y) 
     :x{_x}, y {_y} { }
 };
 
-class Node
+struct Node
 {
-public: // for now
-  Point pos;
-  vector<Body> bin;
-  bool filled;
-  Node() :filled{false} { }
-  Node(Point _pos, vector<Body> _bin) 
-    :pos{_pos}, bin{_bin}, filled{true} { }
+    Body b;
+    bool filled;
+    double total_mass;  // total mass of node & any children
+    Point center_of_mass;   // center of mass for node & any children
+
+    Point tl;   // top left point of the node's bounds
+    Point br;   // bottom right point of the node's bounds
+    
+    Node* nw; Node* ne; Node* sw; Node* se; // children nodes
 };
 
 class Quad_Tree
 {
-  private:
-    Point tl; //top left point of the node's bounds
-    Point br; //bottom right point of the node's bounds
-    
-    //contains details of the node
-    Node *node_info;
-    
-    //children of the node
-    Quad_Tree *nw; 
-    Quad_Tree *ne;
-    Quad_Tree *sw;
-    Quad_Tree *se;
-  
-  public:
-    Quad_Tree()
-    {
-      tl = Point(0,0);
-      br = Point(0,0);
-      node_info = NULL;
-      nw = NULL;
-      ne = NULL;
-      sw = NULL;
-      se = NULL;
-    }
-    Quad_Tree(Point _tl, Point _br)
-    {
-      tl = _tl;
-      br = _br;
-      node_info = NULL;
-      nw = NULL;
-      ne = NULL;
-      sw = NULL;
-      se = NULL;
-  
-    }
-//    void Insert(Body, Node*);
-//    void Quad_Tree_Build();
-//    bool inBoundary(Point);
+public:
+
+private:
+    static double mass_threshold;
+    static double radius_threshold;
+    Node* node;
+
+    Quad_Tree() :node{NULL} { }
+    void insert(Node* node);
+    void quadTreeBuild();
+    void split(Node* node)
 };
 
 #endif
