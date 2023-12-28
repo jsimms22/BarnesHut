@@ -1,3 +1,6 @@
+#ifndef FORCE_H
+#define FORCE_H
+
 #include<vector>
 using std::vector;
 #include<cmath>
@@ -18,3 +21,5 @@ namespace particle_sys
         body.ay += ((_G * neighbor.m) / pow(radius,3)) * dy;
     }
 }
+
+#endif

@@ -5,12 +5,12 @@
 
 namespace quadtree
 {
-    template <typename T>
     class Box
     {
     public:
-        Point<T> tl;   // top left point of the node's bounds
-        Point<T> br;   // bottom right point of the node's bounds
+        Box() { }
+        Point tl;   // top left point of the node's bounds
+        Point br;   // bottom right point of the node's bounds
     };
 } // quadtree
 

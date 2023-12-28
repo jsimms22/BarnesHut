@@ -43,4 +43,5 @@ namespace particle_sys
 
     void init_particles(vector<Body>& bin, int num_bodies);
 } // namespace particle_sys
+
 #endif

@@ -1,4 +1,4 @@
-SRC= forcePairs.cpp body.cpp quadTree.cpp
+SRC= body.cpp quadTree.cpp forcePairs.cpp 
 CXX = g++
 CXXFLAGS = -O3 -Wall
 LFLAGS = 

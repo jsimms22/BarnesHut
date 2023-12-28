@@ -49,10 +49,14 @@ int main()
     double totalTime = 0, maxTime = _dt*3;
     std::vector<particle_sys::Body> body_bin;
 
-    particle_sys::init_particles(body_bin,n);
+    //particle_sys::init_particles(body_bin,n);
+    quadtree::QuadTree qt = quadtree::QuadTree();
+    qt.init_tree(body_bin,n);
 
-    do {
-        Loop(body_bin);
-        totalTime += _dt;
-    } while(totalTime <= maxTime);
+    quadtree::print_node_bin(qt.get_root());
+
+    // do {
+    //     Loop(body_bin);
+    //     totalTime += _dt;
+    // } while(totalTime <= maxTime);
 }

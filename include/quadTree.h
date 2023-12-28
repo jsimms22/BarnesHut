@@ -25,11 +25,10 @@ namespace quadtree
     //     Node* se; // children nodes
     // };
 
-    template <typename T>
     struct Node
     {
         vector<particle_sys::Body> node_bin;
-        Box<T> node_box;
+        Box node_box;
         // children nodes
         Node* nw; 
         Node* ne; 
@@ -37,21 +36,25 @@ namespace quadtree
         Node* se; 
     };
 
-    template <typename T>
+    void print_node_bin(Node* n);
+
     class QuadTree
     {
     public:
-        QuadTree();
-        void build();
-        void insert(particle_sys::Body& j, Node<T>* node);  /* TODO */
-        void split(Node<T>* node);                          /* TODO */
-        bool is_root() const;                               /* TODO */
-        bool in_boundary(Point<T> p) const;
+        QuadTree()
+            :root{NULL} { }
+        void init_tree(std::vector<particle_sys::Body>& bin, int n);
+        void insert(particle_sys::Body& j, Node* node); /* TODO */
+        void split(Node* node);                         /* TODO */
+        bool is_root() const;                           /* TODO */
+        bool in_boundary(Point p) const;
+
+        Node* get_root() const { return root; }
         
     private:
         //static double mass_threshold;
         //static double radius_threshold;
-        std::unique_ptr<Node<T>> root;
+        Node* root;
     };
 
     // template <typename T>

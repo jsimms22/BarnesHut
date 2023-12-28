@@ -3,20 +3,17 @@
 
 namespace quadtree
 {
-    template<typename T>
     struct Point
     {
-        T x; 
-        T y;
+        double x; 
+        double y;
         Point() { }
-        Point(T _x, T _y) :x{_x}, y {_y} { }
+        Point(double _x, double _y) :x{_x}, y {_y} { }
     };
 
-    template<typename T>
-    inline bool operator==(Point<T> a, Point<T> b) { return a.x==b.x && a.y==b.y; }
+    inline bool operator==(Point a, Point b) { return a.x==b.x && a.y==b.y; }
 
-    template<typename T>
-    inline bool operator!=(Point<T> a, Point<T> b) { return !(a==b); }
+    inline bool operator!=(Point a, Point b) { return !(a==b); }
 
 } // namespace quadtree
 #endif 
