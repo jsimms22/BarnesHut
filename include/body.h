@@ -4,7 +4,6 @@
 #include<cmath>
 #include<ctime>
 #include<vector>
-using std::vector;
 #include<iostream>
 #include<iomanip>
 // using std::setprecision;
@@ -41,7 +40,7 @@ namespace particle_sys
         bool is_center = false;
     };
 
-    void init_particles(vector<Body>& bin, int num_bodies);
+    void init_particles(std::vector<Body>& bin, int num_bodies);
 } // namespace particle_sys
 
 #endif

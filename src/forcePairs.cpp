@@ -12,17 +12,17 @@
 #include "../include/quadTree.h"
  
 const double _PI = atan(1.0);
-constexpr double _G = 0.1;
+constexpr double _G = 6.674e-11;
 constexpr double _pMaxMass = 2.0;
 constexpr double _pMinMass = 1.0;
 constexpr double _pWidth = 327680.0;
 constexpr double _pHeight = 327680.0;
-constexpr double _pMaxDist = 20000.0;
+constexpr double _pMaxDist = 150000.0;
 constexpr double _pMinDist = 50.0;
 constexpr double _GCM = 1000000.0;
 constexpr double _dt = .1;
 
-void Loop(vector<particle_sys::Body>& bin) {
+void Loop(std::vector<particle_sys::Body>& bin) {
     for (int i = 0; i < bin.size(); i++) {
         bin[i].ax = bin[i].ay = 0.0;
         for (int j = 0; j < bin.size(); j++) {
@@ -44,8 +44,8 @@ void Loop(vector<particle_sys::Body>& bin) {
 
 int main()
 {
-    srand(time(NULL));
-    int n = 5;
+    srand(time(nullptr));
+    int n = 500;
     double totalTime = 0, maxTime = _dt*3;
     std::vector<particle_sys::Body> body_bin;
 

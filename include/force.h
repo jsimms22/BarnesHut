@@ -2,7 +2,6 @@
 #define FORCE_H
 
 #include<vector>
-using std::vector;
 #include<cmath>
 #include "body.h"
 
@@ -10,7 +9,7 @@ extern const double _G;
 
 namespace particle_sys
 {
-    void accel(Body &body, Body &neighbor)
+    void accel(Body& body, Body& neighbor)
     // calculating Gravitational acceleration vector 
     // acceleration of a body = (Grav_Constant * neighbor of mass / radius^3) * unit_vector
     {

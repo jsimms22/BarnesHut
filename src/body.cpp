@@ -6,7 +6,8 @@ namespace particle_sys
     Body::Body()
     {
         // srand(time(NULL));
-        double angle = static_cast<double>(rand()) / (static_cast<double>(RAND_MAX / (2.0 * static_cast<double>(_PI))));
+        double angle = static_cast<double>(rand()) / 
+                            (static_cast<double>(RAND_MAX / (2.0 * static_cast<double>(_PI))));
         double coef = static_cast<double>(rand()) / static_cast<double>(RAND_MAX);
         double dist = _pMinDist + ((_pMaxDist - _pMinDist) * (coef * coef));
         x = cos(angle) * dist + (_pWidth / 2.0);
@@ -32,7 +33,7 @@ namespace particle_sys
         y += vy * _dt;
     }
 
-    void init_particles(vector<Body>& bin, int num_bodies)
+    void init_particles(std::vector<Body>& bin, int num_bodies)
     // generating bodies
     {
         // populating bodies with initial values

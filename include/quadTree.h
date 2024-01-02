@@ -1,39 +1,27 @@
 #ifndef QUADTREE_H
 #define QUADTREE_H
 
-#include<memory>
+//#include<memory>
 #include "body.h"
 #include "point.h"
 #include "box.h"
+#include<array>
+#include<memory>
 
 namespace quadtree
 {
-    // class Node
-    // {
-    //     vector<Body> node_bin;
-    //     bool filled;
-    //     double total_mass;  // total mass of node & any children
-    //     Point center_of_mass;   // center of mass for node & any children
-    //     void calc_cm();
-
-    //     Point tl;   // top left point of the node's bounds
-    //     Point br;   // bottom right point of the node's bounds
-        
-    //     Node* nw; 
-    //     Node* ne; 
-    //     Node* sw; 
-    //     Node* se; // children nodes
-    // };
-
     struct Node
     {
-        vector<particle_sys::Body> node_bin;
-        Box node_box;
-        // children nodes
-        Node* nw; 
-        Node* ne; 
-        Node* sw; 
-        Node* se; 
+        std::vector<particle_sys::Body> m_bin;  // particle bodies within this node's "box"
+        Box m_box;                              // defined box for node
+        std::array<Node*, 4> quad;              // children nodes
+        Node* m_parent;                         // parent node
+
+        Node(Box _box, Node* _p) :m_box{_box}, m_parent{_p} 
+            { quad = {nullptr,nullptr,nullptr,nullptr}; }
+
+        Node(std::vector<particle_sys::Body> _bin, Box _box, Node* _p) 
+            :m_bin{_bin}, m_box{_box}, m_parent{_p} { quad = {nullptr,nullptr,nullptr,nullptr}; }
     };
 
     void print_node_bin(Node* n);
@@ -42,25 +30,20 @@ namespace quadtree
     {
     public:
         QuadTree()
-            :root{NULL} { }
+            :m_root{nullptr} { }
         void init_tree(std::vector<particle_sys::Body>& bin, int n);
-        void insert(particle_sys::Body& j, Node* node); /* TODO */
-        void split(Node* node);                         /* TODO */
-        bool is_root() const;                           /* TODO */
-        bool in_boundary(Point p) const;
-
-        Node* get_root() const { return root; }
+        void insert(Node* root, particle_sys::Body& b); /* TODO */
+        void split(Node* node);             /* TODO */
+        bool is_root() const { return (m_root->m_parent == nullptr); }
+        Node* get_root() const { return m_root; }
         
     private:
         //static double mass_threshold;
         //static double radius_threshold;
-        Node* root;
+        Node* m_root;
     };
 
-    // template <typename T>
-    // const bool in_boundary(Point<T> p);
-
-    
+    bool in_boundary(Box b, Point p);
 } // namespace quadtree
 
 #endif
