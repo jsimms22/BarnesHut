@@ -1,12 +1,11 @@
 #ifndef QUADTREE_H
 #define QUADTREE_H
 
-//#include<memory>
+#include<array>
+#include<memory>
 #include "body.h"
 #include "point.h"
 #include "box.h"
-#include<array>
-#include<memory>
 
 namespace quadtree
 {
@@ -32,8 +31,8 @@ namespace quadtree
         QuadTree()
             :m_root{nullptr} { }
         void init_tree(std::vector<particle_sys::Body>& bin, int n);
-        void insert(Node* root, particle_sys::Body& b); /* TODO */
-        void split(Node* node);             /* TODO */
+        void insert(Node* root, particle_sys::Body& b); /* IN PROGRESS */
+
         bool is_root() const { return (m_root->m_parent == nullptr); }
         Node* get_root() const { return m_root; }
         

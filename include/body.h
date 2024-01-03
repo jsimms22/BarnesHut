@@ -6,9 +6,6 @@
 #include<vector>
 #include<iostream>
 #include<iomanip>
-// using std::setprecision;
-// using std::setw;
-// using std::fixed;
 
 extern const double _PI;
 extern const double _G;

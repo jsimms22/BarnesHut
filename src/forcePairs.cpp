@@ -2,10 +2,6 @@
 #include<string>
 #include<iostream>
 #include<vector>
-// #include<iomanip>
-// using std::setprecision;
-// using std::setw;
-// using std::fixed;
 #include<cmath>
 #include "../include/body.h"
 #include "../include/force.h"
