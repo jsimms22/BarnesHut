@@ -12,7 +12,8 @@ namespace quadtree
         }
 
         if (this->m_root == nullptr) {
-            this->m_root = new Node{bin,Box(),nullptr};
+            Box temp = Box(Point{0,_pHeight}, Point{_pWidth,0});
+            this->m_root = new Node{bin,temp,nullptr};
             if (bin.size() > 1) {
                 for (auto b : this->m_root->m_bin) {
                     insert(m_root,b);
@@ -25,18 +26,25 @@ namespace quadtree
     {
         Node* ptr = root;
         if (ptr != nullptr) {
-            for (Node* q : ptr->quad) {
-                q = new Node(Box(),ptr);
-                if (in_boundary(q->m_box,Point{b.x,b.y})) {
-                    q->m_bin.push_back(b);
-                    ptr = q;
-                    insert(ptr,b);
+            //std::cout << ptr->quad.size() << '\n';
+            for (int i = 0; i < 4; i++) {
+                //std::cout << "hello: " << i << '\n';
+                Box temp = create_box(ptr,i);
+                ptr->quad[i] = new Node(temp,ptr);
+                if (in_boundary(ptr->quad[i]->m_box,Point{b.x,b.y})) {
+                    std::cout << "hello from quad: " << i+1 << '\n';
+                    ptr->quad[i]->m_bin.push_back(b);
+                    ptr = ptr->quad[i];
+                    return;
+                    //insert(ptr,b);
                 }
+                //std::cout << "running\n";
             }
         } else /*if (ptr == nullptr && ptr != this->get_root())*/ {
             std::cout << "something else is happening\n";
+            return;
         }
-
+        return;
     }
 
     bool in_boundary(Box b, Point p)
@@ -45,6 +53,35 @@ namespace quadtree
         p.x <= b.br.x &&
         p.y >= b.br.y &&
         p.y <= b.tl.y);
+    }
+
+    Box create_box(Node* parent, int quad) 
+    {
+        Point _tl, _br;
+        switch(quad){
+            case 0:
+                //std::cout << "case 0 ";
+                return Box(parent->m_box.tl,parent->m_box.center);
+            case 1:
+                //std::cout << "case 1 ";
+                _tl = Point{(parent->m_box.tl.x+parent->m_box.br.x)/2, 
+                            parent->m_box.tl.y};
+                _br = Point{parent->m_box.br.x,
+                            (parent->m_box.tl.y+parent->m_box.br.y)/2};
+                return Box(_tl,_br);
+            case 2:
+                //std::cout << "case 2 ";
+                _tl = Point{parent->m_box.tl.x,
+                            (parent->m_box.tl.y+parent->m_box.br.y)/2};
+                _br = Point{(parent->m_box.tl.x+parent->m_box.br.x)/2,
+                            parent->m_box.br.y};
+                return Box(_tl,_br);
+            case 3:
+                //std::cout << "case 3 ";
+                return Box(parent->m_box.center,parent->m_box.br);
+            default:
+                return Box(Point{0,1},Point{1,0});
+        }
     }
 
     // void QuadTree::insert(particle_sys::Body& j, Node* n)

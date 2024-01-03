@@ -22,7 +22,7 @@ namespace particle_sys
     }
 
     Body::Body(double _m) 
-        :x{0.0}, y{0.0}, m{_m}, vx{0.0}, vy{0.0}, ax{0.0}, ay{0.0}, is_center{true} { }
+        :x{_pWidth/2.0}, y{_pHeight/2.0}, m{_m}, vx{0.0}, vy{0.0}, ax{0.0}, ay{0.0}, is_center{true} { }
 
     void Body::move()
     // moving bodies

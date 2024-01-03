@@ -44,6 +44,7 @@ namespace quadtree
     };
 
     bool in_boundary(Box b, Point p);
+    Box create_box(Node* parent, int quad);
 } // namespace quadtree
 
 #endif
