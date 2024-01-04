@@ -32,6 +32,7 @@ namespace quadtree
             :m_root{nullptr} { }
         void init_tree(std::vector<particle_sys::Body>& bin, int n);
         void insert(Node* root, particle_sys::Body& b); /* IN PROGRESS */
+        //void split(Node* root, std::vector<particle_sys::Body>& bin);
 
         bool is_root() const { return (m_root->m_parent == nullptr); }
         Node* get_root() const { return m_root; }

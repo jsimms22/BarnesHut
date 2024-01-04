@@ -12,11 +12,11 @@ const double _PI = std::acos(-1.0);
 constexpr double _G = 6.674e-11;
 constexpr double _pMaxMass = 2.0;
 constexpr double _pMinMass = 1.0;
-constexpr double _pWidth = 1000000;
-constexpr double _pHeight = 1000000;
-constexpr double _pMaxDist = 500000;
-constexpr double _pMinDist = 10000;
-constexpr double _GCM = 1000000.0;
+constexpr double _pWidth = 1;
+constexpr double _pHeight = 1;
+constexpr double _pMaxDist = 0.1;
+constexpr double _pMinDist = 0.01;
+constexpr double _GCM = 1.0;
 constexpr double _dt = .1;
 
 void Loop(std::vector<particle_sys::Body>& bin) {
