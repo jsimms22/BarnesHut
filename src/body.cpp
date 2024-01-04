@@ -4,19 +4,11 @@ namespace particle_sys
 {
     Body::Body()
     {
-        /*
-        double angle = static_cast<double>(rand()) / (static_cast<double>(RAND_MAX / (2.0 * static_cast<double>(_PI))));
-        std::cout << "angle: " << angle << " ";
-        double coef = static_cast<double>(rand()) / static_cast<double>(RAND_MAX);
-        std::cout << ", coef: " << coef << " ";
-        double dist = _pMinDist + ((_pMaxDist - _pMinDist) * (coef * coef));
-        std::cout << ", dist: " << dist << "\n";
-        */
-        double angle = (static_cast<double>(rand()) / (static_cast<double>(RAND_MAX))) * (2.0 * _PI);
-        double dist = 
+        double angle = (static_cast<double>(std::rand()) / static_cast<double>(RAND_MAX)) * (2.0 * _PI);
+        double dist = (((static_cast<double>(std::rand()) / static_cast<double>(RAND_MAX))) * _pMaxDist) + (_pMinDist);
 
-        x = cos(angle) * dist + (_pWidth /*/ 2.0*/);
-        y = sin(angle) * dist + (_pHeight /*/ 2.0*/);
+        x = cos(angle) * dist;
+        y = sin(angle) * dist;
 
         double orbVel = sqrt((_GCM * static_cast<double>(_G)) / dist);
         vx = (sin(angle) * orbVel);

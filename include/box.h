@@ -14,6 +14,8 @@ namespace quadtree
         {
             if (a.x >= b.x || b.y >= a.y) { std::cout << "box error\n"; }
             center = Point{(a.x+b.x)/2,(a.y+b.y)/2};
+            //std::cout << tl << '\n';
+            //std::cout << br << '\n';
         }
         
         Point tl;   // top left point of the node's bounds

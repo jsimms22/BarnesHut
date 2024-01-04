@@ -13,5 +13,11 @@ namespace quadtree
 
     inline bool operator==(Point a, Point b) { return a.x==b.x && a.y==b.y; }
     inline bool operator!=(Point a, Point b) { return !(a==b); }
+
+    inline std::ostream& operator<<(std::ostream& os, const Point p)
+    {
+        os << '{' << p.x << ',' << p.y << '}';
+        return os;
+    }
 } // namespace quadtree
 #endif 
